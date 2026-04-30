@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PoDéS — Grupo de investigación en Políticas y Derechos Sociales en América Latina y Europa. Universidad Complutense de Madrid." />
+  <meta name="keywords" content="política social comparada, derechos humanos, América Latina, Europa, Estados de Bienestar, UCM, gobernanza multinivel" />
+  <title>PoDéS — Políticas y Derechos Sociales en América Latina y Europa | UCM</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --podes-red: #7a1c2e;
+      --podes-red-dark: #5a1422;
+      --podes-gold: #c9a961;
+      --podes-ink: #1a1a2e;
+      --podes-charcoal: #2d2d3a;
+      --podes-gray: #6b6b7a;
+      --podes-light: #f5f2ec;
+      --podes-cream: #fbf9f4;
+      --podes-border: #e6e1d6;
+      --shadow-sm: 0 2px 8px rgba(26, 26, 46, 0.06);
+      --shadow-md: 0 8px 24px rgba(26, 26, 46, 0.08);
+      --shadow-lg: 0 16px 48px rgba(26, 26, 46, 0.12);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--podes-ink);
+      background: var(--podes-cream);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.2; color: var(--podes-ink); }
+    h2 { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 1rem; }
+    h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    h4 { font-size: 1.15rem; margin-bottom: 0.5rem; font-family: var(--sans); font-weight: 600; }
+
+    p { margin-bottom: 1rem; color: var(--podes-charcoal); }
+    a { color: var(--podes-red); text-decoration: none; transition: color .2s ease; }
+    a:hover { color: var(--podes-red-dark); }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .narrow { max-width: 880px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ========= NAV ========= */
+    nav.topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(251, 249, 244, 0.92);
+      backdrop-filter: saturate(180%) blur(10px);
+      -webkit-backdrop-filter: saturate(180%) blur(10px);
+      border-bottom: 1px solid var(--podes-border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1200px; margin: 0 auto; padding: 0.85rem 1.5rem;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 0.7rem; font-family: var(--serif);
+      font-size: 1.45rem; font-weight: 700; color: var(--podes-red);
+    }
+    .brand-mark {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--podes-red); color: #fff;
+      display: grid; place-items: center; font-family: var(--serif);
+      font-weight: 700; font-size: 1rem; letter-spacing: .02em;
+      box-shadow: inset 0 0 0 2px var(--podes-gold);
+    }
+    .nav-links { display: flex; gap: 1.6rem; list-style: none; align-items: center; }
+    .nav-links a {
+      color: var(--podes-charcoal); font-weight: 500; font-size: 0.92rem;
+      letter-spacing: .01em; position: relative; padding: 0.25rem 0;
+    }
+    .nav-links a:hover { color: var(--podes-red); }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; bottom: -2px;
+      width: 0; height: 2px; background: var(--podes-red); transition: width .25s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-toggle {
+      display: none; background: none; border: 0; cursor: pointer;
+      padding: 0.4rem; color: var(--podes-ink);
+    }
+    @media (max-width: 880px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        position: absolute; top: 100%; right: 0; left: 0;
+        flex-direction: column; gap: 0; padding: 0;
+        background: var(--podes-cream); border-bottom: 1px solid var(--podes-border);
+        max-height: 0; overflow: hidden; transition: max-height .3s ease;
+      }
+      .nav-links.open { max-height: 500px; padding: 0.5rem 1rem 1rem; }
+      .nav-links li { width: 100%; border-bottom: 1px solid var(--podes-border); }
+      .nav-links li:last-child { border-bottom: 0; }
+      .nav-links a { display: block; padding: 0.85rem 0; }
+    }
+
+    /* ========= HERO ========= */
+    .hero {
+      position: relative; padding: 7rem 0 6rem; overflow: hidden;
+      background:
+        radial-gradient(1200px 500px at 80% -10%, rgba(201, 169, 97, 0.18), transparent 60%),
+        radial-gradient(900px 500px at 0% 110%, rgba(122, 28, 46, 0.12), transparent 60%),
+        linear-gradient(180deg, #fbf9f4 0%, #f5f2ec 100%);
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(122, 28, 46, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(122, 28, 46, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; text-align: center; }
+    .eyebrow {
+      display: inline-block; font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--podes-red); margin-bottom: 1.2rem;
+      padding: 0.4rem 0.9rem; border: 1px solid var(--podes-red);
+      border-radius: 999px; background: rgba(122, 28, 46, 0.04);
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700; letter-spacing: -0.01em;
+      margin-bottom: 1.2rem; color: var(--podes-ink);
+    }
+    .hero h1 em { font-style: italic; color: var(--podes-red); }
+    .hero .lede {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      max-width: 720px; margin: 0 auto 2rem;
+      color: var(--podes-charcoal);
+    }
+    .hero-meta {
+      display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+      font-size: 0.88rem; color: var(--podes-gray); margin-top: 1.2rem;
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .hero-meta strong { color: var(--podes-charcoal); font-weight: 600; }
+    .cta-row {
+      display: flex; gap: 0.8rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 1.5rem; border-radius: 8px; font-weight: 500;
+      font-size: 0.95rem; transition: all .2s ease; cursor: pointer; border: 0;
+      font-family: var(--sans);
+    }
+    .btn-primary { background: var(--podes-red); color: #fff; }
+    .btn-primary:hover { background: var(--podes-red-dark); color: #fff; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-secondary {
+      background: transparent; color: var(--podes-ink);
+      border: 1px solid var(--podes-charcoal);
+    }
+    .btn-secondary:hover { background: var(--podes-ink); color: #fff; }
+
+    /* ========= SECTIONS ========= */
+    section { padding: 5rem 0; }
+    .section-head {
+      text-align: center; max-width: 720px; margin: 0 auto 3.5rem;
+    }
+    .section-head .eyebrow { margin-bottom: 0.9rem; }
+    .section-head p { font-size: 1.05rem; color: var(--podes-gray); }
+
+    .alt-bg { background: #fff; border-top: 1px solid var(--podes-border); border-bottom: 1px solid var(--podes-border); }
+
+    /* ========= SOBRE ========= */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr; gap: 3rem;
+      align-items: center; max-width: 1100px; margin: 0 auto;
+    }
+    @media (min-width: 880px) { .about-grid { grid-template-columns: 1.2fr 1fr; gap: 4rem; } }
+    .about-text p { font-size: 1.05rem; line-height: 1.8; }
+    .about-text p strong { color: var(--podes-red); font-weight: 600; }
+    .about-card {
+      background: var(--podes-light);
+      border-left: 4px solid var(--podes-red);
+      padding: 2rem; border-radius: 4px;
+    }
+    .about-card h4 { color: var(--podes-red); font-family: var(--serif); font-size: 1.4rem; margin-bottom: 1rem; }
+    .stat-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+    .stat .num { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--podes-red); display: block; line-height: 1; }
+    .stat .label { font-size: 0.85rem; color: var(--podes-gray); margin-top: 0.3rem; display: block; }
+
+    /* ========= LÍNEAS DE INVESTIGACIÓN ========= */
+    .lines-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem; margin-top: 2rem;
+    }
+    .line {
+      background: #fff; border: 1px solid var(--podes-border); border-radius: 10px;
+      padding: 1.75rem; transition: all .25s ease; position: relative; overflow: hidden;
+    }
+    .line::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--podes-red), var(--podes-gold));
+      transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
+    }
+    .line:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: transparent; }
+    .line:hover::before { transform: scaleX(1); }
+    .line-num {
+      font-family: var(--serif); font-size: 1rem; color: var(--podes-gold);
+      font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.5rem; display: block;
+    }
+    .line h4 { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--podes-ink); margin-bottom: 0.5rem; }
+    .line p { font-size: 0.93rem; color: var(--podes-gray); margin: 0; }
+
+    /* ========= EQUIPO ========= */
+    .team-block { margin-bottom: 2.5rem; }
+    .team-block h3 {
+      font-family: var(--serif); color: var(--podes-red);
+      font-size: 1.5rem; margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem; border-bottom: 2px solid var(--podes-border);
+      display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap;
+    }
+    .team-block h3 small { font-family: var(--sans); font-size: 0.78rem; color: var(--podes-gray); font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; }
+    .people-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .person {
+      background: var(--podes-cream); border: 1px solid var(--podes-border);
+      border-radius: 8px; padding: 1.25rem 1.25rem 1.1rem;
+      transition: all .2s ease; position: relative;
+    }
+    .person:hover { border-color: var(--podes-red); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .person .avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--podes-red), var(--podes-red-dark));
+      color: #fff; display: grid; place-items: center;
+      font-family: var(--serif); font-weight: 700; font-size: 1.05rem;
+      margin-bottom: 0.85rem; box-shadow: inset 0 0 0 2px rgba(201, 169, 97, 0.4);
+    }
+    .person .name { font-weight: 600; font-size: 1rem; color: var(--podes-ink); margin-bottom: 0.15rem; }
+    .person .affil { font-size: 0.83rem; color: var(--podes-gray); }
+
+    /* ========= PUBLICACIONES ========= */
+    .pub-tabs {
+      display: flex; gap: 0.5rem; justify-content: center;
+      margin-bottom: 2.5rem; flex-wrap: wrap;
+    }
+    .pub-tab {
+      padding: 0.6rem 1.25rem; border-radius: 999px;
+      background: transparent; border: 1px solid var(--podes-border);
+      color: var(--podes-charcoal); cursor: pointer; font-size: 0.9rem;
+      font-family: var(--sans); transition: all .2s ease;
+    }
+    .pub-tab:hover { border-color: var(--podes-red); color: var(--podes-red); }
+    .pub-tab.active { background: var(--podes-red); border-color: var(--podes-red); color: #fff; }
+    .pub-list { display: none; max-width: 900px; margin: 0 auto; }
+    .pub-list.active { display: block; animation: fadeIn .35s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .pub-item {
+      padding: 1.25rem 0; border-bottom: 1px solid var(--podes-border);
+      display: grid; grid-template-columns: 70px 1fr; gap: 1.25rem; align-items: start;
+    }
+    .pub-item:last-child { border-bottom: 0; }
+    .pub-year {
+      font-family: var(--serif); font-size: 1.5rem; font-weight: 600;
+      color: var(--podes-red); line-height: 1;
+    }
+    .pub-content .pub-title { font-weight: 600; color: var(--podes-ink); margin-bottom: 0.3rem; line-height: 1.45; }
+    .pub-content .pub-authors { font-size: 0.88rem; color: var(--podes-gray); margin-bottom: 0.3rem; }
+    .pub-content .pub-source { font-size: 0.88rem; color: var(--podes-charcoal); font-style: italic; }
+    .pub-content .pub-links { margin-top: 0.5rem; display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.85rem; }
+    .pub-content .pub-links a { font-weight: 500; }
+    .placeholder-note {
+      background: rgba(201, 169, 97, 0.12); border: 1px dashed var(--podes-gold);
+      padding: 1rem 1.25rem; border-radius: 8px; font-size: 0.88rem;
+      color: var(--podes-charcoal); margin-top: 1rem; text-align: center;
+    }
+
+    /* ========= PROYECTOS ========= */
+    .proj-filter { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+    }
+    .project {
+      background: #fff; border: 1px solid var(--podes-border); border-radius: 10px;
+      padding: 1.75rem; transition: all .25s ease; position: relative;
+    }
+    .project:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .project .badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 600;
+      padding: 0.25rem 0.65rem; border-radius: 4px;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      margin-bottom: 0.85rem;
+    }
+    .badge.active { background: rgba(34, 139, 87, 0.12); color: #1f7a4d; }
+    .badge.past { background: rgba(107, 107, 122, 0.12); color: var(--podes-gray); }
+    .project h4 { font-family: var(--serif); font-size: 1.25rem; line-height: 1.3; margin-bottom: 0.6rem; }
+    .project .funder { font-size: 0.85rem; color: var(--podes-gray); margin-bottom: 0.5rem; }
+    .project .period { font-size: 0.85rem; color: var(--podes-charcoal); font-weight: 500; }
+
+    /* ========= TESIS ========= */
+    .thesis-tabs { margin-bottom: 2rem; display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+    .thesis-block { display: none; max-width: 900px; margin: 0 auto; }
+    .thesis-block.active { display: block; animation: fadeIn .35s ease; }
+    .thesis-item {
+      background: #fff; border: 1px solid var(--podes-border); border-left: 3px solid var(--podes-red);
+      padding: 1.25rem 1.5rem; border-radius: 6px; margin-bottom: 0.85rem;
+    }
+    .thesis-item .student { font-weight: 600; color: var(--podes-ink); margin-bottom: 0.2rem; }
+    .thesis-item .title { color: var(--podes-charcoal); font-style: italic; margin-bottom: 0.4rem; }
+    .thesis-item .meta { font-size: 0.85rem; color: var(--podes-gray); }
+
+    /* ========= OPORTUNIDADES ========= */
+    .opp-banner {
+      background: linear-gradient(135deg, var(--podes-red) 0%, var(--podes-red-dark) 100%);
+      color: #fff; padding: 3.5rem 2rem; border-radius: 16px;
+      max-width: 1000px; margin: 0 auto; position: relative; overflow: hidden;
+    }
+    .opp-banner::before {
+      content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(201, 169, 97, 0.25), transparent 70%);
+    }
+    .opp-banner h2 { color: #fff; margin-bottom: 1rem; }
+    .opp-banner p { color: rgba(255, 255, 255, 0.9); font-size: 1.05rem; max-width: 720px; }
+    .opp-list {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-top: 1.75rem; position: relative;
+    }
+    .opp-list li {
+      list-style: none; padding: 0.85rem 1rem;
+      background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px; font-size: 0.92rem; backdrop-filter: blur(4px);
+    }
+
+    /* ========= CONTACTO ========= */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1000px; margin: 0 auto;
+    }
+    @media (min-width: 760px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+    .contact-card {
+      background: #fff; border: 1px solid var(--podes-border); border-radius: 10px;
+      padding: 2rem;
+    }
+    .contact-card h3 { color: var(--podes-red); }
+    .contact-detail { display: flex; align-items: flex-start; gap: 0.85rem; margin-top: 1rem; }
+    .contact-icon {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(122, 28, 46, 0.08); color: var(--podes-red);
+      display: grid; place-items: center;
+    }
+    .contact-detail .label { font-size: 0.78rem; color: var(--podes-gray); text-transform: uppercase; letter-spacing: 0.05em; }
+    .contact-detail .value { font-size: 0.98rem; color: var(--podes-ink); font-weight: 500; }
+
+    form .field { margin-bottom: 1rem; }
+    form label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--podes-charcoal); margin-bottom: 0.4rem; }
+    form input, form textarea {
+      width: 100%; padding: 0.7rem 0.9rem; font-family: var(--sans); font-size: 0.95rem;
+      border: 1px solid var(--podes-border); border-radius: 6px; background: var(--podes-cream);
+      color: var(--podes-ink); transition: border-color .2s ease;
+    }
+    form input:focus, form textarea:focus { outline: none; border-color: var(--podes-red); background: #fff; }
+    form textarea { resize: vertical; min-height: 110px; }
+
+    /* ========= FOOTER ========= */
+    footer {
+      background: var(--podes-ink); color: rgba(255, 255, 255, 0.85);
+      padding: 3rem 0 1.5rem; margin-top: 4rem;
+    }
+    footer .container { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+    @media (min-width: 760px) { footer .container { grid-template-columns: 2fr 1fr 1fr; } }
+    footer h5 { font-family: var(--sans); font-weight: 600; font-size: 0.95rem; color: #fff; margin-bottom: 1rem; letter-spacing: 0.02em; }
+    footer p, footer li { font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); }
+    footer ul { list-style: none; }
+    footer li { margin-bottom: 0.5rem; }
+    footer a { color: rgba(255, 255, 255, 0.85); }
+    footer a:hover { color: var(--podes-gold); }
+    .footer-brand { font-family: var(--serif); font-size: 1.5rem; color: #fff; margin-bottom: 0.6rem; font-weight: 700; }
+    .footer-bottom {
+      max-width: 1200px; margin: 2.5rem auto 0; padding: 1.25rem 1.5rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem; font-size: 0.83rem; color: rgba(255, 255, 255, 0.55);
+    }
+
+    /* ========= UTIL ========= */
+    .text-muted { color: var(--podes-gray); font-size: 0.9rem; }
+    [hidden] { display: none !important; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========= NAV ========= -->
+  <nav class="topbar" aria-label="Navegación principal">
+    <div class="nav-inner">
+      <a href="#top" class="brand" aria-label="PoDéS — inicio">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span>PoDéS</span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" id="navToggle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#lineas">Líneas</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+        <li><a href="#publicaciones">Publicaciones</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#tesis">Tesis</a></li>
+        <li><a href="#oportunidades">Oportunidades</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========= HERO ========= -->
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <span class="eyebrow">Universidad Complutense de Madrid</span>
+      <h1>Políticas y Derechos Sociales<br/>en <em>América Latina</em> y <em>Europa</em></h1>
+      <p class="lede">
+        Grupo de investigación comparada sobre políticas sociales, derechos humanos y
+        regímenes de bienestar, con énfasis en poblaciones vulnerables y gobernanza multinivel.
+      </p>
+      <div class="cta-row">
+        <a href="#sobre" class="btn btn-primary">Conoce el grupo</a>
+        <a href="#contacto" class="btn btn-secondary">Colabora con nosotros</a>
+      </div>
+      <div class="hero-meta">
+        <span><strong>Constituido:</strong> 3 de julio de 2025</span>
+        <span><strong>Sede:</strong> Facultad de Ciencias Políticas y Sociología, UCM</span>
+        <span><strong>Contacto:</strong> <a href="mailto:podes@ucm.es">podes@ucm.es</a></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========= SOBRE ========= -->
+  <section id="sobre" class="alt-bg">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Sobre PoDéS</span>
+        <h2>Un grupo nacido del diálogo comparado</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            <strong>PoDéS</strong> es un grupo de investigación de la <strong>Facultad de Ciencias Políticas y Sociología
+            de la Universidad Complutense de Madrid</strong>, constituido formalmente el 3 de julio de 2025. Su origen
+            se encuentra en el monográfico de <em>Política y Sociedad</em> (2023) sobre políticas públicas y
+            derechos humanos de personas mayores en América Latina y Europa, una colaboración que terminó
+            por consolidarse en torno a una agenda común.
+          </p>
+          <p>
+            Desde entonces el grupo ha ampliado su mirada a otras poblaciones vulnerables —migrantes,
+            personas en situación de pobreza, minorías, infancias y personas con diversidad funcional—
+            articulando investigación comparada, transferencia de conocimiento y formación doctoral.
+          </p>
+          <p>
+            Integra <strong>PDI de la UCM</strong> y <strong>expertos externos</strong> (CSIC, Universidad
+            de Valencia, UNAM, UCLM), con publicaciones en revistas y editoriales de alto impacto, proyectos
+            Horizon Europe, contratos de transferencia y tesis doctorales en curso.
+          </p>
+        </div>
+
+        <aside class="about-card">
+          <h4>En cifras</h4>
+          <p class="text-muted">El grupo en una mirada rápida.</p>
+          <div class="stat-row">
+            <div class="stat"><span class="num">2</span><span class="label">Regiones de estudio</span></div>
+            <div class="stat"><span class="num">11+</span><span class="label">Investigadores</span></div>
+            <div class="stat"><span class="num">6</span><span class="label">Líneas de investigación</span></div>
+            <div class="stat"><span class="num">4</span><span class="label">Universidades aliadas</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= LÍNEAS ========= -->
+  <section id="lineas">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Agenda científica</span>
+        <h2>Líneas principales</h2>
+        <p>Seis frentes de trabajo articulados, en diálogo constante entre las dos regiones.</p>
+      </div>
+
+      <div class="lines-grid">
+        <article class="line">
+          <span class="line-num">01</span>
+          <h4>Política social comparada</h4>
+          <p>Sanidad, transferencias condicionadas y cuidados de larga duración en perspectiva regional.</p>
+        </article>
+        <article class="line">
+          <span class="line-num">02</span>
+          <h4>Gobernanza multinivel</h4>
+          <p>Arquitectura institucional de los Estados de Bienestar en sistemas federales y descentralizados.</p>
+        </article>
+        <article class="line">
+          <span class="line-num">03</span>
+          <h4>Derechos humanos y justiciabilidad</h4>
+          <p>Jurisprudencia comparada en los sistemas interamericano y europeo de protección.</p>
+        </article>
+        <article class="line">
+          <span class="line-num">04</span>
+          <h4>Particularismo y clientelismo</h4>
+          <p>Lógicas políticas que median el acceso y la calidad de las políticas sociales.</p>
+        </article>
+        <article class="line">
+          <span class="line-num">05</span>
+          <h4>Regímenes de bienestar</h4>
+          <p>Trayectorias y desarrollo institucional en clave histórico-comparada.</p>
+        </article>
+        <article class="line">
+          <span class="line-num">06</span>
+          <h4>Innovación docente</h4>
+          <p>Metodologías y materiales para la enseñanza universitaria de políticas sociales.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= EQUIPO ========= -->
+  <section id="equipo" class="alt-bg">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">El equipo</span>
+        <h2>Investigadores</h2>
+        <p>PDI de la UCM y un círculo cercano de colegas externos con quienes investigamos y publicamos.</p>
+      </div>
+
+      <div class="team-block">
+        <h3>Investigadores UCM <small>Universidad Complutense de Madrid</small></h3>
+        <div class="people-grid" id="teamUCM"></div>
+      </div>
+
+      <div class="team-block">
+        <h3>Investigadores externos <small>Colaboradores institucionales</small></h3>
+        <div class="people-grid" id="teamExt"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= PUBLICACIONES ========= -->
+  <section id="publicaciones">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Producción científica</span>
+        <h2>Publicaciones</h2>
+        <p>Selección de trabajos del grupo, organizados por tipología.</p>
+      </div>
+
+      <div class="pub-tabs" role="tablist">
+        <button class="pub-tab active" data-target="pub-articulos" role="tab" aria-selected="true">Artículos</button>
+        <button class="pub-tab" data-target="pub-libros" role="tab">Libros</button>
+        <button class="pub-tab" data-target="pub-capitulos" role="tab">Capítulos</button>
+        <button class="pub-tab" data-target="pub-otros" role="tab">Otros</button>
+      </div>
+
+      <div class="pub-list active" id="pub-articulos" role="tabpanel">
+        <article class="pub-item">
+          <div class="pub-year">2023</div>
+          <div class="pub-content">
+            <p class="pub-title">Monográfico: Políticas públicas y derechos humanos de personas mayores en América Latina y Europa</p>
+            <p class="pub-authors">Cruz-Martínez, G.; Díaz-Tendero Bollaín, A. (coords.) y autores del grupo</p>
+            <p class="pub-source">Política y Sociedad, 60(2)</p>
+            <p class="pub-links"><a href="#" target="_blank" rel="noopener">Ver número</a></p>
+          </div>
+        </article>
+        <div class="placeholder-note">
+          Marcador para añadir el resto de artículos del grupo. Estructura sugerida: año, título, autoría, revista/volumen, enlace DOI.
+        </div>
+      </div>
+
+      <div class="pub-list" id="pub-libros" role="tabpanel">
+        <div class="placeholder-note">
+          Añade aquí los libros publicados por miembros del grupo. Sugerencia: año, título, autoría, editorial, ISBN, enlace.
+        </div>
+      </div>
+
+      <div class="pub-list" id="pub-capitulos" role="tabpanel">
+        <div class="placeholder-note">
+          Espacio para capítulos de libro: autoría, título del capítulo, editores del libro, editorial, páginas, año.
+        </div>
+      </div>
+
+      <div class="pub-list" id="pub-otros" role="tabpanel">
+        <div class="placeholder-note">
+          Working papers, informes técnicos, divulgación, prensa académica, podcasts, etc.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= PROYECTOS ========= -->
+  <section id="proyectos" class="alt-bg">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Investigación financiada</span>
+        <h2>Proyectos</h2>
+        <p>Proyectos competitivos, contratos de transferencia y consorcios internacionales.</p>
+      </div>
+
+      <div class="proj-filter">
+        <button class="pub-tab active" data-filter="all">Todos</button>
+        <button class="pub-tab" data-filter="active">Activos</button>
+        <button class="pub-tab" data-filter="past">Finalizados</button>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid">
+        <article class="project" data-status="active">
+          <span class="badge active">Activo</span>
+          <h4>[Título del proyecto activo]</h4>
+          <p class="funder">Convocatoria / Entidad financiadora</p>
+          <p class="period">2024 — 2027 · IP: [Nombre]</p>
+        </article>
+        <article class="project" data-status="active">
+          <span class="badge active">Activo</span>
+          <h4>[Otro proyecto en curso — Horizon Europe / PID / Transferencia]</h4>
+          <p class="funder">Comisión Europea / AEI / Contrato</p>
+          <p class="period">2025 — 2028 · IP: [Nombre]</p>
+        </article>
+        <article class="project" data-status="past">
+          <span class="badge past">Finalizado</span>
+          <h4>[Proyecto finalizado — añadir título]</h4>
+          <p class="funder">Entidad financiadora</p>
+          <p class="period">2020 — 2023 · IP: [Nombre]</p>
+        </article>
+      </div>
+
+      <div class="placeholder-note" style="margin-top: 2rem;">
+        Marcadores listos para sustituir por proyectos reales. Sugerencia mínima: título, financiador, periodo, IP, breve descripción y enlace.
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= TESIS ========= -->
+  <section id="tesis">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Formación doctoral y de máster</span>
+        <h2>Tesis y TFM</h2>
+        <p>Dirección y tutorización de investigación en formación.</p>
+      </div>
+
+      <div class="thesis-tabs">
+        <button class="pub-tab active" data-thesis="tesis-defendidas">Tesis defendidas</button>
+        <button class="pub-tab" data-thesis="tesis-curso">Tesis en curso</button>
+        <button class="pub-tab" data-thesis="tfm-defendidos">TFM defendidos</button>
+        <button class="pub-tab" data-thesis="tfm-curso">TFM en curso</button>
+      </div>
+
+      <div class="thesis-block active" id="tesis-defendidas">
+        <article class="thesis-item">
+          <p class="student">[Nombre del/a doctorando/a]</p>
+          <p class="title">«Título provisional de la tesis defendida»</p>
+          <p class="meta">Director/a: [Nombre] · Programa de Doctorado · Año de defensa</p>
+        </article>
+        <div class="placeholder-note">Listado para completar con tesis defendidas dirigidas por miembros del grupo.</div>
+      </div>
+
+      <div class="thesis-block" id="tesis-curso">
+        <article class="thesis-item">
+          <p class="student">[Nombre del/a doctorando/a]</p>
+          <p class="title">«Título provisional»</p>
+          <p class="meta">Director/a: [Nombre] · Año de inscripción · Programa</p>
+        </article>
+        <div class="placeholder-note">Tesis en proceso. Añade resumen breve y línea de investigación.</div>
+      </div>
+
+      <div class="thesis-block" id="tfm-defendidos">
+        <article class="thesis-item">
+          <p class="student">[Nombre del/a estudiante]</p>
+          <p class="title">«Título del TFM»</p>
+          <p class="meta">Tutor/a: [Nombre] · Máster · Año de defensa</p>
+        </article>
+        <div class="placeholder-note">TFM defendidos bajo tutorización del grupo.</div>
+      </div>
+
+      <div class="thesis-block" id="tfm-curso">
+        <article class="thesis-item">
+          <p class="student">[Nombre del/a estudiante]</p>
+          <p class="title">«Título provisional»</p>
+          <p class="meta">Tutor/a: [Nombre] · Máster · Curso académico</p>
+        </article>
+        <div class="placeholder-note">TFM en curso.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= OPORTUNIDADES ========= -->
+  <section id="oportunidades" class="alt-bg">
+    <div class="container">
+      <div class="opp-banner">
+        <span class="eyebrow" style="background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.4); color: #fff;">¿Quieres unirte?</span>
+        <h2>Estancias, tesis y contratos postdoctorales</h2>
+        <p>
+          PoDéS recibe regularmente investigadores e investigadoras pre y postdoctorales en
+          estancia, dirige tesis doctorales y apoya activamente candidaturas a programas
+          competitivos. Si tu agenda dialoga con nuestras líneas, escríbenos: el ajuste temático
+          y la mentoría son la mitad del camino.
+        </p>
+        <ul class="opp-list">
+          <li>Estancias de investigación pre y postdoctorales</li>
+          <li>Dirección de tesis doctorales</li>
+          <li>Juan de la Cierva (formación e incorporación)</li>
+          <li>Ramón y Cajal</li>
+          <li>Marie Skłodowska-Curie (PF · Doctoral Networks)</li>
+          <li>Cátedras / Profesores visitantes</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= CONTACTO ========= -->
+  <section id="contacto">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Hablemos</span>
+        <h2>Contacto</h2>
+        <p>Escríbenos para colaboraciones, estancias, propuestas docentes o consultas de prensa.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Datos del grupo</h3>
+          <p class="text-muted">Coordinación general y vías de contacto institucional.</p>
+
+          <div class="contact-detail">
+            <div class="contact-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <span class="label">Email</span>
+              <a class="value" href="mailto:podes@ucm.es">podes@ucm.es</a>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <span class="label">Sede</span>
+              <span class="value">Facultad de Ciencias Políticas y Sociología<br/>Universidad Complutense de Madrid</span>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div>
+              <span class="label">Web institucional</span>
+              <a class="value" href="https://www.ucm.es" target="_blank" rel="noopener">www.ucm.es</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3>Escríbenos</h3>
+          <p class="text-muted">Cuéntanos brevemente tu interés y te respondemos en pocos días.</p>
+          <form action="mailto:podes@ucm.es" method="post" enctype="text/plain">
+            <div class="field">
+              <label for="cf-name">Nombre</label>
+              <input id="cf-name" name="nombre" type="text" required>
+            </div>
+            <div class="field">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" name="email" type="email" required>
+            </div>
+            <div class="field">
+              <label for="cf-msg">Mensaje</label>
+              <textarea id="cf-msg" name="mensaje" required placeholder="¿En qué te podemos ayudar? (estancia, tesis, colaboración, prensa…)"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= FOOTER ========= -->
+  <footer>
+    <div class="container">
+      <div>
+        <p class="footer-brand">PoDéS</p>
+        <p>Políticas y Derechos Sociales en América Latina y Europa.</p>
+        <p style="margin-top: 0.6rem;">Universidad Complutense de Madrid · Facultad de Ciencias Políticas y Sociología.</p>
+      </div>
+      <div>
+        <h5>Enlaces</h5>
+        <ul>
+          <li><a href="#sobre">Sobre el grupo</a></li>
+          <li><a href="#equipo">Equipo</a></li>
+          <li><a href="#publicaciones">Publicaciones</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Institucionales</h5>
+        <ul>
+          <li><a href="https://www.ucm.es" target="_blank" rel="noopener">Universidad Complutense</a></li>
+          <li><a href="https://politicasysociologia.ucm.es" target="_blank" rel="noopener">Facultad de CC. Políticas y Sociología</a></li>
+          <li><a href="mailto:podes@ucm.es">podes@ucm.es</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Grupo de Investigación PoDéS · UCM</span>
+      <span>Hecho con cuidado académico.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Toggle nav móvil
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Datos del equipo
+    const ucm = [
+      'Gibrán Cruz-Martínez',
+      'Aída Díaz-Tendero Bollaín',
+      'Ana Belén Benito Sánchez',
+      'Fernando González Barroso',
+      'Manuel Sánchez Reinón',
+      'Carlos Javier Trelles Steindl'
+    ];
+    const ext = [
+      { name: 'Roberta Perna', affil: 'IPP-CSIC' },
+      { name: 'Jorge Hernández-Moreno', affil: 'IPP-CSIC' },
+      { name: 'María José Vicente Vicente', affil: 'UCLM' },
+      { name: 'Luis Jimena Quesada', affil: 'Universidad de Valencia' },
+      { name: 'Gerardo Torres Salcido', affil: 'UNAM' }
+    ];
+    const initials = (name) => name.split(' ').filter(Boolean).slice(0, 2).map(s => s[0]).join('').toUpperCase();
+    const renderPerson = (p) => {
+      const name = typeof p === 'string' ? p : p.name;
+      const affil = typeof p === 'string' ? 'UCM · Facultad de CC. Políticas y Sociología' : p.affil;
+      return `<article class="person"><div class="avatar" aria-hidden="true">${initials(name)}</div><p class="name">${name}</p><p class="affil">${affil}</p></article>`;
+    };
+    document.getElementById('teamUCM').innerHTML = ucm.map(renderPerson).join('');
+    document.getElementById('teamExt').innerHTML = ext.map(renderPerson).join('');
+
+    // Tabs publicaciones
+    document.querySelectorAll('.pub-tabs .pub-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.pub-tabs .pub-tab').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
+        document.querySelectorAll('.pub-list').forEach(l => l.classList.remove('active'));
+        document.getElementById(btn.dataset.target).classList.add('active');
+      });
+    });
+
+    // Filtro proyectos
+    document.querySelectorAll('.proj-filter .pub-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.proj-filter .pub-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('#projectsGrid .project').forEach(p => {
+          p.style.display = (f === 'all' || p.dataset.status === f) ? '' : 'none';
+        });
+      });
+    });
+
+    // Tabs tesis
+    document.querySelectorAll('.thesis-tabs .pub-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.thesis-tabs .pub-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.thesis-block').forEach(b => b.classList.remove('active'));
+        document.getElementById(btn.dataset.thesis).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
