@@ -427,9 +427,12 @@
     <div class="hero-inner">
       <div class="hero-logo">
         <picture class="logo-display">
-          <img src="logo.png" alt="PoDéS — Políticas y Derechos Sociales en América Latina y Europa"
+          <source srcset="logo.jpg" type="image/jpeg">
+          <source srcset="logo.png" type="image/png">
+          <source srcset="logo.svg" type="image/svg+xml">
+          <img id="logoImg" src="logo.jpg" alt="PoDéS — Políticas y Derechos Sociales en América Latina y Europa"
                style="width:100%; height:auto; max-width:280px;"
-               onerror="this.style.display='none'; document.getElementById('fallbackLogo').style.display='block';">
+               onerror="tryNextLogo(this);">
         </picture>
         <svg id="fallbackLogo" width="280" height="200" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" style="display:none; max-width:60vw;">
           <defs>
@@ -1080,11 +1083,35 @@
       { name: 'Gerardo Torres Salcido', affil: 'Universidad Nacional Autónoma de México (UNAM)', file: 'gerardo-torres-salcido' }
     ];
     const initials = (name) => name.split(' ').filter(Boolean).slice(0, 2).map(s => s[0]).join('').toUpperCase();
+    // Intenta varias extensiones antes de rendirse — orden: jpg, jpeg, png, webp
+    const photoExts = ['jpg', 'jpeg', 'png', 'webp'];
+    window.tryNextPhoto = function(img) {
+      const file = img.dataset.file;
+      let idx = parseInt(img.dataset.extIdx || '0', 10) + 1;
+      if (idx >= photoExts.length) { img.remove(); return; }
+      img.dataset.extIdx = idx;
+      img.src = `team/${file}.${photoExts[idx]}`;
+    };
+    // Igual para el logo principal
+    const logoExts = ['jpg', 'jpeg', 'png', 'svg', 'webp'];
+    window.tryNextLogo = function(img) {
+      let idx = parseInt(img.dataset.extIdx || '0', 10) + 1;
+      if (idx >= logoExts.length) {
+        img.style.display = 'none';
+        const fb = document.getElementById('fallbackLogo');
+        if (fb) fb.style.display = 'block';
+        return;
+      }
+      img.dataset.extIdx = idx;
+      img.src = `logo.${logoExts[idx]}`;
+    };
     const renderPerson = (p) => `
       <article class="person">
         <div class="photo-wrap" aria-hidden="true">
           <span>${initials(p.name)}</span>
-          <img src="team/${p.file}.jpg" alt="" onerror="this.remove();">
+          <img data-file="${p.file}" data-ext-idx="0"
+               src="team/${p.file}.jpg" alt=""
+               onerror="tryNextPhoto(this);">
         </div>
         <p class="name">${p.name}</p>
         <p class="affil">${p.affil}</p>
