@@ -402,27 +402,37 @@
     }
   
     /* === Popup investigador === */
-    .person { cursor: pointer; }
+    .person { cursor: pointer; position: relative; z-index: 1; }
+    .person:hover, .person:focus-within, .person.popup-open { z-index: 999; }
     .person-popup {
-      position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(8px);
+      position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(8px);
       width: 320px; max-width: 90vw;
       background: #fff; border: 1px solid var(--podes-border); border-radius: 10px;
       padding: 1.1rem 1.2rem;
-      box-shadow: 0 12px 36px rgba(26, 43, 77, 0.18);
+      box-shadow: 0 16px 48px rgba(26, 43, 77, 0.22);
       opacity: 0; visibility: hidden; pointer-events: none;
       transition: opacity .18s ease, transform .18s ease, visibility .18s;
-      z-index: 50; text-align: left;
+      z-index: 1000; text-align: left;
     }
-    .person-popup::before {
-      content: ''; position: absolute; top: -7px; left: 50%; transform: translateX(-50%) rotate(45deg);
+    .person-popup::after {
+      content: ''; position: absolute; bottom: -7px; left: 50%; transform: translateX(-50%) rotate(45deg);
       width: 14px; height: 14px; background: #fff;
+      border-right: 1px solid var(--podes-border); border-bottom: 1px solid var(--podes-border);
+    }
+    /* Para las primeras filas (que no tienen espacio arriba) el popup se reposiciona abajo */
+    .person.popup-below .person-popup {
+      bottom: auto; top: calc(100% + 12px);
+    }
+    .person.popup-below .person-popup::after {
+      bottom: auto; top: -7px;
+      border-right: none; border-bottom: none;
       border-left: 1px solid var(--podes-border); border-top: 1px solid var(--podes-border);
     }
     .person:hover .person-popup,
     .person:focus-within .person-popup,
     .person.popup-open .person-popup {
       opacity: 1; visibility: visible; pointer-events: auto;
-      transform: translateX(-50%) translateY(4px);
+      transform: translateX(-50%) translateY(0);
     }
     .popup-name {
       font-family: var(--serif); font-weight: 700; font-size: 1.1rem;
@@ -592,6 +602,141 @@
 
       <!-- ARTÍCULOS -->
       <div class="pub-list active" id="pub-articulos" role="tabpanel">
+        <article class="pub-item">
+          <div class="pub-year">2026</div>
+          <div class="pub-content">
+            <p class="pub-title">Assessing the impact, uptake and use of reporting guidelines for patient and public involvement in research: GRIPP2 — study protocol for a meta-research project</p>
+            <p class="pub-authors">Catalá-López, F.; Ganuza, E.; Alonso-Arroyo, A.; <strong>Perna, R.</strong>; Tricco, A. C.; et al.</p>
+            <p class="pub-source">BMJ Open, 16(4), e115612</p>
+            <p class="pub-links"><a href="https://bmjopen.bmj.com/content/bmjopen/16/4/e115612.full.pdf" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2026</div>
+          <div class="pub-content">
+            <p class="pub-title">GRIPP2: adaptación al español de las guías para mejorar la presentación de la participación de pacientes y ciudadanos en la investigación</p>
+            <p class="pub-authors">Catalá-López, F.; Ganuza, E.; Staniszewska, S.; <strong>Perna, R.</strong>; Tejedor-Romero, L.; et al.</p>
+            <p class="pub-source">Gaceta Sanitaria, 102564</p>
+            <p class="pub-links"><a href="https://www.sciencedirect.com/science/article/pii/S0213911126000014" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2026</div>
+          <div class="pub-content">
+            <p class="pub-title">Patient and public involvement in health technology assessments: study protocol for a cross-sectional analysis</p>
+            <p class="pub-authors">Catalá-López, F.; <strong>Perna, R.</strong>; Hutton, B.; et al.</p>
+            <p class="pub-source">Gaceta Sanitaria</p>
+            <p class="pub-links"><a href="https://dialnet.unirioja.es/servlet/articulo?codigo=10681855" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2025</div>
+          <div class="pub-content">
+            <p class="pub-title">Cooperación y coordinación en el sector sanitario: una evaluación comparativa del Consejo Interterritorial del SNS (CISNS)</p>
+            <p class="pub-authors">Colino, C.; Del Pino, E.; <strong>Hernández-Moreno, J.</strong></p>
+            <p class="pub-source">Revista de Estudios Políticos, 210, pp. 325-370</p>
+            <p class="pub-links"><a href="https://dialnet.unirioja.es/servlet/articulo?codigo=10500384" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2025</div>
+          <div class="pub-content">
+            <p class="pub-title">Recentralisation in welfare? Measuring and comparing territorial governance change in Spain</p>
+            <p class="pub-authors"><strong>Hernández-Moreno, J.</strong>; Del Pino, E.; Ramos, J. A.; Colino, C.</p>
+            <p class="pub-source">Environment and Planning C: Politics and Space</p>
+            <p class="pub-links"><a href="https://journals.sagepub.com/doi/abs/10.1177/23996544251322018" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2025</div>
+          <div class="pub-content">
+            <p class="pub-title">Review Essay — Territorial Politics and COVID: A Comprehensive Review</p>
+            <p class="pub-authors"><strong>Hernández-Moreno, J.</strong>; Harguindéguy, J.-B.; Carrasco-Ariza, B.</p>
+            <p class="pub-source">Politics &amp; Policy</p>
+            <p class="pub-links"><a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/polp.70010" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2025</div>
+          <div class="pub-content">
+            <p class="pub-title">Regulatory Approaches in the Face of a Pandemic: Assessing the Role of Ideology, Context, and Rule Design in Four Spanish Regions</p>
+            <p class="pub-authors">Parrado, S.; <strong>Perna, R.</strong>; Closa, C.; Pereira-Puga, M.</p>
+            <p class="pub-source">Public Administration</p>
+            <p class="pub-links"><a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/padm.70010" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2025</div>
+          <div class="pub-content">
+            <p class="pub-title">Intra-EU migration and healthcare deservingness: A conjoint experiment in Belgium and Spain</p>
+            <p class="pub-authors"><strong>Perna, R.</strong>; Umpierrez de Reguero, S.</p>
+            <p class="pub-source">Social Science &amp; Medicine, 367</p>
+            <p class="pub-links"><a href="https://www.sciencedirect.com/science/article/pii/S0277953625000437" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2025</div>
+          <div class="pub-content">
+            <p class="pub-title">Cooperativismo y economía social y solidaria en el constitucionalismo histórico español</p>
+            <p class="pub-authors"><strong>Jimena Quesada, L.</strong></p>
+            <p class="pub-source">CIRIEC-España, Revista Jurídica de Economía Social y Cooperativa, 46</p>
+            <p class="pub-links"><a href="https://doi.org/10.7203/ciriec-jur.46.29493" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2024</div>
+          <div class="pub-content">
+            <p class="pub-title">COVID-19 and territorial politics: towards a redefinition of Spanish intergovernmental relations?</p>
+            <p class="pub-authors"><strong>Hernández-Moreno, J.</strong>; Harguindéguy, J.-B.</p>
+            <p class="pub-source">Regional Studies, Regional Science, 11(1), pp. 387-405</p>
+            <p class="pub-links"><a href="https://www.tandfonline.com/doi/abs/10.1080/21681376.2024.2370420" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2024</div>
+          <div class="pub-content">
+            <p class="pub-title">Civil society organisations and the healthcare of irregular migrants: The humanitarianism-equity dilemma</p>
+            <p class="pub-authors">Piccoli, L.; <strong>Perna, R.</strong></p>
+            <p class="pub-source">Comparative Migration Studies, 12(1), pp. 1-18</p>
+            <p class="pub-links"><a href="https://link.springer.com/article/10.1186/s40878-024-00372-5" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2024</div>
+          <div class="pub-content">
+            <p class="pub-title">Multilevel governance in farmers' markets: a stakeholder analysis in Tuscany</p>
+            <p class="pub-authors">Belletti, G.; <strong>Torres Salcido, G.</strong>; Scarpellini, P.; Mengoni, M.; Marescotti, A.</p>
+            <p class="pub-source">Frontiers in Sustainable Food Systems, 8, 1401488</p>
+            <p class="pub-links"><a href="https://www.frontiersin.org/journals/sustainable-food-systems" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2023</div>
+          <div class="pub-content">
+            <p class="pub-title">Immigrant regularisation politics during COVID-19: advocacy coalitions and governments' incentives in Italy and Spain</p>
+            <p class="pub-authors"><strong>Perna, R.</strong>; Puig Batalla, M.</p>
+            <p class="pub-source">South European Society and Politics, 28(4), pp. 415-438</p>
+            <p class="pub-links"><a href="https://www.tandfonline.com/doi/abs/10.1080/13608746.2024.2354007" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2023</div>
+          <div class="pub-content">
+            <p class="pub-title">The Multiannual Financial Framework 2021–2027 and Next Generation EU — A turning point of EU multi-level governance?</p>
+            <p class="pub-authors">Kölling, M.; <strong>Hernández-Moreno, J.</strong></p>
+            <p class="pub-source">Journal of Contemporary European Studies</p>
+            <p class="pub-links"><a href="https://www.tandfonline.com/doi/abs/10.1080/14782804.2023.2241832" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2023</div>
+          <div class="pub-content">
+            <p class="pub-title">Derechos relativos al bienestar y el cuidado de las personas mayores a la luz de los estándares evolutivos del sistema europeo</p>
+            <p class="pub-authors"><strong>Jimena Quesada, L.</strong></p>
+            <p class="pub-source">Política y Sociedad, 60(2)</p>
+            <p class="pub-links"><a href="https://doi.org/10.5209/poso.84549" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
         <article class="pub-item">
           <div class="pub-year">2026</div>
           <div class="pub-content">
@@ -1023,6 +1168,15 @@
         <article class="pub-item">
           <div class="pub-year">2025</div>
           <div class="pub-content">
+            <p class="pub-title">Long-Term Care and Older People in Western Europe: Lessons From the COVID-19 Pandemic</p>
+            <p class="pub-authors"><strong>Perna, R.</strong>; Moreno, L.; Ranci, C.; Hernández-Moreno, J.; Pereira-Puga, M.; Cruz-Martínez, G.; et al. (eds.)</p>
+            <p class="pub-source">Policy Press</p>
+            <p class="pub-links"><a href="https://bristoluniversitypressdigital.com/edcollbook/book/9781447367314/9781447367314.xml" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2025</div>
+          <div class="pub-content">
             <p class="pub-title">V Observatorio ELA 2024</p>
             <p class="pub-source">V Observatorio ELA 2024</p>
             <p class="pub-links"><a href="https://produccioncientifica.ucm.es/documentos/685ace02149c1e249a097af0" target="_blank" rel="noopener">Ver</a></p>
@@ -1048,6 +1202,50 @@
 
       <!-- CAPÍTULOS -->
       <div class="pub-list" id="pub-capitulos" role="tabpanel">
+        <article class="pub-item">
+          <div class="pub-year">2025</div>
+          <div class="pub-content">
+            <p class="pub-title">Welfare regimes and long-term care in the 'Old Continent'</p>
+            <p class="pub-authors"><strong>Perna, R.</strong>; Moreno, L.</p>
+            <p class="pub-source">En <em>Long-Term Care and Older People in Western Europe</em> (Policy Press), pp. 24-34</p>
+            <p class="pub-links"><a href="https://bristoluniversitypressdigital.com/edcollchap/book/9781447367314/ch002.xml" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2025</div>
+          <div class="pub-content">
+            <p class="pub-title">Caught Up in a Broader Struggle: Expansions and Restrictions of Migrants' Healthcare Entitlements in the Spanish Decentralised System</p>
+            <p class="pub-authors"><strong>Perna, R.</strong>; Moreno Fuentes, F. J.</p>
+            <p class="pub-source">En <em>Multidisciplinary Perspectives on Immigrant Health: New Insights from Spain</em> (Springer), pp. 21-40</p>
+            <p class="pub-links"><a href="https://link.springer.com/chapter/10.1007/978-3-031-82352-7_2" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2024</div>
+          <div class="pub-content">
+            <p class="pub-title">Protection against gender-based violence under the European Social Charter</p>
+            <p class="pub-authors"><strong>Jimena Quesada, L.</strong></p>
+            <p class="pub-source">En <em>Research Handbook on Gender-Based Violence and the Law</em> (Edward Elgar)</p>
+            <p class="pub-links"><a href="https://doi.org/10.4337/9781035346660.00011" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2024</div>
+          <div class="pub-content">
+            <p class="pub-title">Problemas intersectorial e intergubernamentalmente complejos e integración de políticas en situaciones de crisis</p>
+            <p class="pub-authors"><strong>Hernández-Moreno, J.</strong>; Moreno Fuentes, F. J.; Del Pino, E.</p>
+            <p class="pub-source">En <em>Evaluación de la gestión de la pandemia COVID-19 en España</em> (Tirant lo Blanch), pp. 293-320</p>
+            <p class="pub-links"><a href="https://dialnet.unirioja.es/servlet/articulo?codigo=10251981" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
+          <div class="pub-year">2023</div>
+          <div class="pub-content">
+            <p class="pub-title">El derecho humano a la alimentación adecuada y sus implicaciones en el desarrollo territorial</p>
+            <p class="pub-authors"><strong>Torres Salcido, G.</strong></p>
+            <p class="pub-source">En <em>Horizontes y experiencias agroalimentarias en México</em> (UNAM-IIS), Vol. 2, pp. 303-327</p>
+          </div>
+        </article>
         <article class="pub-item">
           <div class="pub-year">2026</div>
           <div class="pub-content">
@@ -1333,6 +1531,15 @@
       <!-- OTROS -->
       <div class="pub-list" id="pub-otros" role="tabpanel">
         <article class="pub-item">
+          <div class="pub-year">2023</div>
+          <div class="pub-content">
+            <p class="pub-title">Care Workers in Spain in the Post-COVID-19 Era</p>
+            <p class="pub-authors"><strong>Hernández-Moreno, J.</strong></p>
+            <p class="pub-source">Friedrich-Ebert-Stiftung</p>
+            <p class="pub-links"><a href="https://library.fes.de/pdf-files/bueros/madrid/20782.pdf" target="_blank" rel="noopener">Ver</a></p>
+          </div>
+        </article>
+        <article class="pub-item">
           <div class="pub-year">2025</div>
           <div class="pub-content">
             <p class="pub-title">De la movilización social a la política pública: análisis del proceso legislativo de la Ley ELA en España</p>
@@ -1449,14 +1656,7 @@
             <div class="badges"><span class="badge active">Activo</span></div>
             <h4>Impacto del uso de juegos en el aula como recurso docente</h4>
             <p class="funder">Programa Innova-Docencia, Oficina para la Calidad (UCM)</p>
-            <p class="meta"><strong>2022 — 2025</strong> · IP: Óliver Soto Sainz (UCM) · A. B. Benito y G. Cruz-Martínez miembros del equipo</p>
-          </article>
-
-          <article class="project" data-status="active">
-            <div class="badges"><span class="badge active">Activo</span></div>
-            <h4>Situación actual de los estudiantes de América Latina y el Caribe en la Universidad Complutense de Madrid</h4>
-            <p class="funder">Observatorio del Estudiante UCM · €3.999,40</p>
-            <p class="meta">IPs: Andrea Serrano Paredes y Brenda Lucía Báscones Cornejo · G. Cruz-Martínez equipo investigador</p>
+            <p class="meta"><strong>2022 — 2027</strong> · IP: Óliver Soto Sainz (UCM) · A. B. Benito y G. Cruz-Martínez miembros del equipo</p>
           </article>
 
           <article class="project" data-status="past">
@@ -1528,7 +1728,12 @@
             <p class="funder">PAPIIT IA300117 · UNAM · €10.685</p>
             <p class="meta"><strong>01/2017 — 12/2018</strong> · IP: A. Díaz-Tendero</p>
           </article>
-
+          <article class="project" data-status="active">
+            <div class="badges"><span class="badge active">Activo</span><span class="badge intl">UNA Europa</span></div>
+            <h4>WISE CARE — Working together in Europe towards One Health around the world</h4>
+            <p class="funder">UNA Europa Seed Funding · €18.235</p>
+            <p class="meta">IP: Martijn Sijbom (Universiteit Leiden) · G. Cruz-Martínez investigador</p>
+          </article>
         </div>
       </div>
 
@@ -1549,11 +1754,11 @@
             <p class="meta"><strong>Enero — Febrero 2023</strong> · A. B. Benito, consultora-experta país</p>
           </article>
 
-          <article class="project" data-status="active">
-            <div class="badges"><span class="badge active">Activo</span></div>
+          <article class="project" data-status="past">
+            <div class="badges"><span class="badge past">Finalizado</span></div>
             <h4>Detección y movilización de personas elegibles para el Ingreso Mínimo Vital en situación de Non-Take Up</h4>
             <p class="funder">EU Next Generation y Ministerio de Inclusión, Seguridad Social y Migraciones · €6.173.427 (proyecto)</p>
-            <p class="meta">IP: Carlos Susías Rodado (EAPN) · G. Cruz-Martínez en el comité académico (Art. 83)</p>
+            <p class="meta"><strong>2022 — 2024</strong> · IP: Carlos Susías Rodado (EAPN) · G. Cruz-Martínez en el comité académico (Art. 83)</p>
           </article>
 
           <article class="project" data-status="past">
@@ -1582,6 +1787,19 @@
             <h4>Los Legislativos Latinoamericanos en la universalización de los resultados democráticos y como garantes de la legalidad</h4>
             <p class="funder">Centro de Estudios Políticos y Constitucionales · Programa García-Pelayo · Mº de la Presidencia</p>
             <p class="meta"><strong>21/11/2016 — 20/11/2019</strong> · IP: A. B. Benito</p>
+          </article>
+          <article class="project" data-status="active">
+            <div class="badges"><span class="badge active">Activo</span></div>
+            <h4>Diagnóstico de situación de los trabajadores y trabajadoras de los servicios sociales en España (Libro Blanco)</h4>
+            <p class="funder">Ministerio de Derechos Sociales y Agenda 2030 · Fundación Fresno · €12.000</p>
+            <p class="meta"><strong>2025 — 2026</strong> · IPs: G. Cruz-Martínez y J. Hernández-Moreno</p>
+          </article>
+
+          <article class="project" data-status="past">
+            <div class="badges"><span class="badge past">Finalizado</span></div>
+            <h4>V Informe del Observatorio Esclerosis Lateral Amiotrófica (ELA)</h4>
+            <p class="funder">Fundación Luzón · €9.200</p>
+            <p class="meta"><strong>2024 — 2025</strong> · IPs: G. Cruz-Martínez y J. Hernández-Moreno</p>
           </article>
 
         </div>
@@ -1638,6 +1856,31 @@
           <p class="title">«Responsabilidad social en un contexto de globalización de los mercados: estudio comparado de la articulación de políticas públicas en el sector farmacéutico de Brasil y España»</p>
           <p class="meta"><strong>UCM</strong> · Director: Manuel Sánchez Reinón</p>
         </article>
+        <article class="thesis-item">
+          <p class="student">María José Hernández Burbano <span class="text-muted">· 2024</span></p>
+          <p class="title">«Análisis de eficacia en la formulación de políticas públicas de protección jurídica de las finanzas estatales: La implementación de los acuerdos marco de precios como diseño institucional de la compra pública en Colombia»</p>
+          <p class="meta"><strong>Universidad Autónoma de Madrid</strong> · Director: Manuel Sánchez Reinón</p>
+        </article>
+        <article class="thesis-item">
+          <p class="student">Blanca Rosa Gutiérrez Porras <span class="text-muted">· 2016</span></p>
+          <p class="title">«Estado de bienestar y cambio: la transformación de las políticas públicas de salud en Costa Rica (1990-2014)»</p>
+          <p class="meta"><strong>UCM</strong> · Director: Manuel Sánchez Reinón</p>
+        </article>
+        <article class="thesis-item">
+          <p class="student">Santiago Illescas Correa <span class="text-muted">· 2016</span></p>
+          <p class="title">«Transformación del sistema de salud del Ecuador, período 2007-2013»</p>
+          <p class="meta"><strong>UCM</strong> · Director: Manuel Sánchez Reinón</p>
+        </article>
+        <article class="thesis-item">
+          <p class="student">Inmaculada Mateos Buendía <span class="text-muted">· 2015</span></p>
+          <p class="title">«Las decisiones en las políticas de los modelos del servicio nacional de salud descentralizados: los casos de la Comunidad de Madrid y la región de Lombardía (2000-2014)»</p>
+          <p class="meta"><strong>UCM</strong> · Director: Manuel Sánchez Reinón</p>
+        </article>
+        <article class="thesis-item">
+          <p class="student">Imelda Ortiz Medina <span class="text-muted">· 2014</span></p>
+          <p class="title">«Relaciones intergubernamentales y descentralización en México: descentralización de la educación básica en Zacatecas 1992-2006»</p>
+          <p class="meta"><strong>UCM</strong> · Director: Manuel Sánchez Reinón</p>
+        </article>
       </div>
 
       <div class="thesis-block" id="tesis-curso">
@@ -1669,6 +1912,16 @@
         <article class="thesis-item in-progress">
           <p class="student">Omar Batista <span class="text-muted">· 2020 — 2025</span></p>
           <p class="title">«La construcción de lo político en los archipiélagos de Canarias y Puerto Rico»</p>
+          <p class="meta">Director: <strong>Gibrán Cruz-Martínez</strong></p>
+        </article>
+        <article class="thesis-item in-progress">
+          <p class="student">María Elisa Alemán Vela <span class="text-muted">· 2025 — 2028</span></p>
+          <p class="title">«La traducción institucional del Buen Vivir y los cambios en la Secretaría Nacional de Planificación del Ecuador (2009-2021): un análisis desde el institucionalismo ideacional e histórico»</p>
+          <p class="meta">Directores: <strong>Gibrán Cruz-Martínez</strong> y <strong>Aída Díaz-Tendero</strong></p>
+        </article>
+        <article class="thesis-item in-progress">
+          <p class="student">Aline Rodrigues <span class="text-muted">· 2023 — 2026</span></p>
+          <p class="title">«Desafíos y promoción de la alimentación adecuada: el rol de las políticas públicas en garantizar la seguridad alimentaria y nutricional»</p>
           <p class="meta">Director: <strong>Gibrán Cruz-Martínez</strong></p>
         </article>
       </div>
@@ -1891,6 +2144,25 @@
       document.querySelectorAll('.person.popup-open').forEach(c => { if (c !== card) c.classList.remove('popup-open'); });
       card.classList.toggle('popup-open');
     });
+  
+    // Reposicionar popup hacia abajo si la persona está en la primera fila (no hay espacio arriba)
+    function adjustPopupPositions() {
+      document.querySelectorAll('.person').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        // Si la persona está cerca del top de la sección equipo (primeros ~280px), popup debajo
+        const section = card.closest('#equipo');
+        if (!section) return;
+        const sectionRect = section.getBoundingClientRect();
+        if (rect.top - sectionRect.top < 250) {
+          card.classList.add('popup-below');
+        } else {
+          card.classList.remove('popup-below');
+        }
+      });
+    }
+    window.addEventListener('load', adjustPopupPositions);
+    window.addEventListener('resize', adjustPopupPositions);
+    document.addEventListener('scroll', adjustPopupPositions);
   </script>
 </body>
 </html>
