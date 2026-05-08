@@ -457,6 +457,33 @@
       .person-popup { width: 280px; }
     }
 
+  
+    /* === Redes sociales === */
+    .social-row {
+      display: flex; gap: 0.7rem; margin-top: 1.2rem; flex-wrap: wrap;
+    }
+    .social-row a {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--podes-light); color: var(--podes-blue);
+      border: 1px solid var(--podes-border);
+      transition: all .2s ease;
+    }
+    .social-row a:hover {
+      background: var(--podes-blue); color: #fff; border-color: var(--podes-blue);
+      transform: translateY(-2px);
+    }
+    .social-row a svg { width: 18px; height: 18px; }
+    /* En el footer cambian los colores */
+    footer .social-row a {
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.85);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    footer .social-row a:hover {
+      background: var(--podes-coral); color: #fff; border-color: var(--podes-coral);
+    }
+
   </style>
 </head>
 <body>
@@ -2096,6 +2123,15 @@
               <a class="value" href="https://produccioncientifica.ucm.es/grupos/198952" target="_blank" rel="noopener">Portal del grupo</a>
             </div>
           </div>
+
+          <div class="social-row">
+            <a href="https://x.com/podes_ucm" target="_blank" rel="noopener" aria-label="PoDéS en X" title="X (Twitter)">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://bsky.app/profile/podes-ucm.bsky.social" target="_blank" rel="noopener" aria-label="PoDéS en Bluesky" title="Bluesky">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.911.58-7.386 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
+            </a>
+          </div>
         </div>
 
         <div class="contact-card">
@@ -2135,6 +2171,10 @@
           <li><a href="https://produccioncientifica.ucm.es/grupos/198952" target="_blank" rel="noopener">Producción Científica UCM</a></li>
           <li><a href="mailto:podes@ucm.es">podes@ucm.es</a></li>
         </ul>
+        <div class="social-row">
+          <a href="https://x.com/podes_ucm" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://bsky.app/profile/podes-ucm.bsky.social" target="_blank" rel="noopener" aria-label="Bluesky"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.911.58-7.386 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg></a>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
